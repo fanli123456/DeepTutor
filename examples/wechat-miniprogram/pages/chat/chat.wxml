@@ -1,0 +1,26 @@
+<view class="page">
+  <scroll-view class="messages" scroll-y="true" scroll-into-view="{{scrollIntoView}}">
+    <block wx:for="{{messages}}" wx:key="id">
+      <view id="msg-{{item.id}}" class="message {{item.role}}">
+        <view class="bubble">
+          <text selectable="true">{{item.content}}</text>
+        </view>
+      </view>
+    </block>
+    <view wx:if="{{statusText}}" class="status">{{statusText}}</view>
+  </scroll-view>
+
+  <view class="composer">
+    <textarea
+      class="input"
+      auto-height="true"
+      maxlength="2000"
+      placeholder="输入你的问题，例如：请讲解二次函数"
+      value="{{inputValue}}"
+      bindinput="onInput"
+      confirm-type="send"
+      bindconfirm="sendMessage"
+    />
+    <button class="send" type="primary" loading="{{sending}}" disabled="{{sending || !inputValue}}" bindtap="sendMessage">发送</button>
+  </view>
+</view>
